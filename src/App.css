@@ -4317,3 +4317,33 @@ body {
   background: #f4eee5;
   color: #111;
 }
+/* Event modal registration action */
+
+.event-modal-register {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--red);
+  background: var(--red);
+  color: var(--paper);
+  font: inherit;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.event-modal-register:hover {
+  background: var(--red-dark);
+  transform: translateY(-2px);
+}
+
+.event-modal-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}

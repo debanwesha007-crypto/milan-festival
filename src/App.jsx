@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowDownRight, ArrowUpRight, Menu, X } from "lucide-react";
 import events from "./data/events";
@@ -152,6 +152,20 @@ const categoryDetails = {
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
+
+  useEffect(() => {
+  const handleEscape = (event) => {
+    if (event.key === "Escape") {
+      setSelectedEvent(null);
+    }
+  };
+
+  document.addEventListener("keydown", handleEscape);
+
+  return () => {
+    document.removeEventListener("keydown", handleEscape);
+  };
+}, []);
   const [registration, setRegistration] = useState({
   name: "",
   email: "",
@@ -1115,8 +1129,30 @@ const filteredEvents = useMemo(() => {
             </div>
 
             <div className="event-modal-footer">
-              MILAN 2027 · THE FESTIVAL EXPERIENCE
-            </div>
+  <button
+    type="button"
+    className="event-modal-register"
+    onClick={() => {
+      setRegistration({
+        ...registration,
+        event: selectedEvent.title,
+      });
+
+      setSelectedEvent(null);
+
+      setTimeout(() => {
+        document
+          .getElementById("register")
+          ?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }}
+  >
+    REGISTER FOR THIS EVENT
+    <ArrowUpRight size={18} />
+  </button>
+
+  <span>MILAN 2027 · THE FESTIVAL EXPERIENCE</span>
+</div>
           </div>
         </div>
       )}
