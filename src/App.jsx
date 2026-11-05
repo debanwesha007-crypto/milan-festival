@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowDownRight, ArrowUpRight, Menu } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Menu, X } from "lucide-react";
 import "./App.css";
 
 const categories = [
@@ -150,6 +150,7 @@ const categoryDetails = {
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedGalleryImage, setSelectedGalleryImage] = useState(null);
 
   const selectedDetails = selectedCategory
     ? categoryDetails[selectedCategory.title]
@@ -563,23 +564,35 @@ function App() {
 
         <div className="gallery-grid">
 
-          <div className="gallery-item gallery-large">
-            <img
-              src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1400&q=85"
-              alt="Festival crowd"
-            />
-            <span>THE CROWD</span>
-          </div>
+          <div
+  className="gallery-item gallery-large"
+  onClick={() =>
+    setSelectedGalleryImage({
+      src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1400&q=85",
+      title: "THE CROWD",
+    })
+  }
+></div>
 
-          <div className="gallery-item">
-            <img
-              src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1000&q=85"
-              alt="Live performance"
-            />
-            <span>LIVE</span>
-          </div>
+          <div
+  className="gallery-item"
+  onClick={() =>
+    setSelectedGalleryImage({
+      src: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1000&q=85",
+      title: "LIVE",
+    })
+  }
+></div>
 
-          <div className="gallery-item">
+          <div
+  className="gallery-item"
+  onClick={() =>
+    setSelectedGalleryImage({
+      src: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1000&q=85",
+      title: "NIGHTS",
+    })
+  }
+>
             <img
               src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1000&q=85"
               alt="Festival lights"
@@ -587,13 +600,15 @@ function App() {
             <span>NIGHTS</span>
           </div>
 
-          <div className="gallery-item gallery-wide">
-            <img
-              src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1400&q=85"
-              alt="Music festival"
-            />
-            <span>THE STAGE</span>
-          </div>
+          <div
+  className="gallery-item gallery-wide"
+  onClick={() =>
+    setSelectedGalleryImage({
+      src: "https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1400&q=85",
+      title: "THE STAGE",
+    })
+  }
+></div>
 
         </div>
 
@@ -728,6 +743,40 @@ function App() {
       </footer>
 
       {/* ================= CATEGORY EXPERIENCE ================= */}
+      {/* ================= GALLERY VIEWER ================= */}
+
+{selectedGalleryImage && (
+  <motion.div
+    className="gallery-viewer"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    onClick={() => setSelectedGalleryImage(null)}
+  >
+    <button
+      className="gallery-viewer-close"
+      onClick={() => setSelectedGalleryImage(null)}
+      aria-label="Close gallery"
+    >
+      <X size={26} />
+    </button>
+
+    <div
+      className="gallery-viewer-content"
+      onClick={(event) => event.stopPropagation()}
+    >
+      <img
+        src={selectedGalleryImage.src}
+        alt={selectedGalleryImage.title}
+      />
+
+      <div className="gallery-viewer-caption">
+        <span>MILAN 2026 ARCHIVE</span>
+        <strong>{selectedGalleryImage.title}</strong>
+      </div>
+    </div>
+  </motion.div>
+)}
 
       {selectedCategory && selectedDetails && (
 
