@@ -4,118 +4,126 @@
 
 A modern, immersive festival website concept for **MILAN 2027**, the national-level cultural fest of **SRM Institute of Science & Technology, Kattankulathur**.
 
-The project is designed to feel less like a conventional college-event website and more like an **editorial digital experience** — bold typography, cinematic sections, interactive event categories, motion, archival visuals and a strong visual identity.
+The website is designed to feel less like a conventional college-event portal and more like an **editorial digital experience** — combining bold typography, cinematic visuals, motion, interactive event discovery, festival scheduling and visual storytelling.
 
 ---
 
-## ◉ The Idea
+## 🌐 Live Demo
 
-Most college-fest websites are built around lists:
+### [MILAN 2027 — Live Website](https://milan-festival.vercel.app/)
+
+**Live URL:**  
+https://milan-festival.vercel.app/
+
+### [GitHub Repository](https://github.com/debanwesha007-crypto/milan-festival)
+
+**Source Code:**  
+https://github.com/debanwesha007-crypto/milan-festival
+
+---
+
+## ◉ The Concept
+
+Most festival websites are structured around:
 
 `Events → Schedule → Registration → Contact`
 
-MILAN is much bigger than a list.
+MILAN is more than a list of events.
 
-So this project treats the website itself as part of the festival experience.
+This project treats the **website itself as part of the festival experience**.
 
-**Explore. Discover. Click. Move through MILAN.**
+The goal was to create a digital space where visitors can explore the different worlds of MILAN through movement, typography, imagery and interaction.
 
-The interface combines:
-
-- Editorial-inspired layouts
-- Dark cinematic visuals
-- Bold typography
-- Red accent system
-- Bento-style event discovery
-- Motion interactions
-- Full-screen category experiences
-- Interactive gallery
-- Festival schedule
-- Pro-show showcase
-- Registration call-to-action
+> **Explore. Discover. Click. Experience MILAN.**
 
 ---
 
-## ✦ Experience
+# ✦ Key Features
 
-### `01` — HERO
+### 🎬 Cinematic Hero
 
-A cinematic opening section introducing:
+The landing experience introduces:
 
-**MILAN 27**
-
-with:
-
+- MILAN 27
 - 19th Edition
 - 2027
 - Festival dates
 - SRM KTR identity
-- Event statistics
+- Festival statistics
 - Interactive exploration CTA
 
 ---
 
-### `02` — FIND YOUR STAGE
+### 🎭 Interactive Event Categories
 
-Explore the different creative worlds of MILAN.
+Visitors can explore different creative disciplines through interactive category cards.
 
-| Category | Experience |
-|---|---|
-| 🎵 MUSIC | Rhythm · Beats · Live |
-| 💃 DANCE | Movement · Expression |
-| 📚 LITERARY | Words · Ideas · Stories |
-| 🎨 CREATIVE ARTS | Create · Experiment |
-| 🎭 DRAMATICS | Stage · Cinema · Theatre |
-| 👗 FASHION | Style · Identity · Runway |
-| 🎮 GAMING | Compete · Play · Win |
-| 🌌 ASTROPHILIA | Space · Science · Wonder |
-| 🧠 QUIZ | Think · Challenge · Win |
-| 🥋 SELF DEFENCE | Strength · Discipline · Skill |
+Current categories include:
 
-Clicking a category opens an **immersive category experience** rather than simply navigating to another page.
+- **Music**
+- **Dance**
+- **Literary**
+- **Creative Arts**
+- **Dramatics**
+- **Fashion**
+- **Gaming**
+- **Astrophilia**
+- **Quiz**
+- **Self Defence**
 
----
+Each category opens into an immersive experience containing:
 
-### `03` — THE STAGE AWAITS
-
-A dedicated Pro Shows section designed around anticipation.
-
-> **ARTIST LINEUP — COMING SOON.**
-
-The section can later be connected to the official artist lineup once it is announced.
+- Category identity
+- Tagline
+- Description
+- Event list
+- Visual archive
+- Festival context
 
 ---
 
-### `04` — PICK YOUR DAY
+### 🎤 Pro Shows
 
-A four-day festival timeline covering:
+A dedicated section for the main stage and upcoming artist lineup.
 
-**18 → 21 February 2027**
-
-Each day has its own visual treatment and space for future event schedules, venues and timings.
+The design intentionally creates anticipation around the future announcement of the official MILAN 2027 artists.
 
 ---
 
-### `05` — MOMENTS FROM MILAN
+### 📅 Four-Day Schedule
 
-A visual archive section built around the energy of a cultural festival.
+A dedicated festival timeline covering:
 
-The gallery is designed to become an expandable archive where future MILAN photographs and videos can be added.
+**18 — 21 February 2027**
 
-Clicking an image opens a larger viewing experience.
+The schedule section provides space for:
+
+- Event timings
+- Venues
+- Activities
+- Daily highlights
+- Future registration information
 
 ---
 
-### `06` — LIVE IT
+### 📸 Visual Gallery
 
-The final registration experience.
+A cinematic gallery showcasing the atmosphere and energy of a large cultural festival.
 
-Instead of ending with a generic form, the site closes with:
+Gallery items can be opened into a larger visual viewing experience.
+
+The section is designed to eventually accommodate the official MILAN media archive.
+
+---
+
+### 🚀 Registration Experience
+
+Instead of ending with a conventional registration form, the website uses a strong final call-to-action:
 
 > **DON'T JUST WATCH.  
 > LIVE IT.**
 
-Registrations can be connected to the official registration system once the 2027 registration portal is available.
+The registration area can be connected to the official MILAN registration system when the 2027 registration portal becomes available.
 
 ---
 
@@ -123,70 +131,69 @@ Registrations can be connected to the official registration system once the 2027
 
 | Technology | Purpose |
 |---|---|
-| **React** | UI architecture |
-| **Vite** | Development & production build |
-| **Framer Motion** | Animations & transitions |
-| **Lucide React** | Interface icons |
-| **CSS** | Visual system & responsive layouts |
-| **Unsplash** | Temporary visual assets |
-| **Git / GitHub** | Version control |
-| **Vercel** | Deployment |
+| React | Frontend UI |
+| Vite | Development & production tooling |
+| Framer Motion | Animations & transitions |
+| Lucide React | Interface icons |
+| CSS | Visual design & responsive layout |
+| Git | Version control |
+| GitHub | Source code hosting |
+| Vercel | Deployment |
 
 ---
 
-# 🖥️ Design System
+# 🎨 Design Direction
 
-The visual language is intentionally bold and editorial.
+The visual identity takes inspiration from modern editorial and festival websites while developing an independent visual language for MILAN.
 
-### Palette
+### Visual Principles
 
-```text
-BLACK       #090909
-PAPER       #F4EEE5
-RED         #FF432F
-DARK RED    #7D1711
-MUTED       #99918B
-```
+- Dark cinematic backgrounds
+- Strong red accents
+- Oversized typography
+- Editorial layouts
+- Asymmetric compositions
+- Bento-style grids
+- Image-driven storytelling
+- Motion-based interactions
+- Minimal but expressive UI
 
 ### Typography
 
 **DM Sans**  
-Used for interface text, descriptions and supporting information.
+Used for interface text, supporting information and descriptions.
 
 **Space Grotesk**  
-Used for large headlines, numbers and editorial typography.
+Used for headlines, large numbers and editorial typography.
 
 ---
 
-# ✦ Interaction Design
+# 🧩 Interaction Design
 
-The website isn't intended to be a static landing page.
+The project focuses on turning a traditional event website into an interactive experience.
 
 ### Category Exploration
 
-Each festival category can be opened to reveal:
+Event categories are not simply static cards.
 
-- Category identity
-- Description
-- Event list
-- Visual archive
-- Festival context
+Selecting one opens a full-screen experience containing additional information and visual context.
 
-### Gallery
+### Gallery Interaction
 
-Gallery items can be opened into a fullscreen visual viewer.
+Gallery images can be selected to open a larger viewing experience.
 
 ### Motion
 
-Framer Motion is used for:
+Framer Motion powers subtle interactions including:
 
 - Hero entrance animations
-- Section transitions
-- Category interactions
-- Image reveals
+- Section reveals
+- Category transitions
+- Image scaling
+- Overlay transitions
 - Fullscreen experiences
 
-The goal is to make the interface feel **alive without overwhelming the content**.
+The animation system is designed to add energy without distracting from the content.
 
 ---
 
@@ -216,45 +223,45 @@ milan-festival/
 
 ---
 
-# 🚀 Run Locally
+# 🚀 Getting Started
 
-Clone the repository:
+## Clone the repository
 
 ```bash
 git clone https://github.com/debanwesha007-crypto/milan-festival.git
 ```
 
-Move into the project:
+## Enter the project
 
 ```bash
 cd milan-festival
 ```
 
-Install dependencies:
+## Install dependencies
 
 ```bash
 npm install
 ```
 
-Start the development server:
+## Start the development server
 
 ```bash
 npm run dev
 ```
 
-Then open the local Vite URL shown in your terminal.
+Vite will provide a local development URL in the terminal.
 
 ---
 
 # 📦 Production Build
 
-To create a production build:
+Create a production build with:
 
 ```bash
 npm run build
 ```
 
-The generated production files will be placed inside:
+The generated files will be available inside:
 
 ```text
 dist/
@@ -264,55 +271,62 @@ dist/
 
 # 🌐 Deployment
 
-The project is deployed using **Vercel**.
+The project is deployed through **Vercel**.
 
-The deployment automatically builds the Vite application from the repository.
+### Live Website
+
+https://milan-festival.vercel.app/
+
+### GitHub Repository
+
+https://github.com/debanwesha007-crypto/milan-festival
 
 ---
 
-# 🧩 Future Possibilities
+# 🔮 Future Scope
 
-The current website is designed as a foundation that can grow with the actual festival.
+The current website is designed as a foundation that can grow alongside the actual festival.
 
-Possible future additions:
+Potential future additions include:
 
 - [ ] Official 2027 event database
-- [ ] Real event registration
-- [ ] Live event schedule
+- [ ] Real-time event schedule
+- [ ] Event registration system
 - [ ] Artist announcements
 - [ ] Individual event pages
-- [ ] Real MILAN photo archive
+- [ ] Official MILAN photo archive
 - [ ] Video archive
 - [ ] Event search and filtering
-- [ ] Interactive campus map
-- [ ] Countdown to MILAN 2027
+- [ ] Interactive SRM campus map
+- [ ] MILAN countdown
 - [ ] Student participation portal
-- [ ] Results / winners archive
-- [ ] PWA / mobile experience
+- [ ] Results and winners archive
+- [ ] Progressive Web App
+- [ ] Mobile-first festival companion experience
 
 ---
 
-# 🎬 Why This Project?
+# 🧠 Design Philosophy
 
-This project explores how a cultural festival can be presented digitally as an **experience rather than an information dump**.
+The project started with a simple question:
 
-The objective wasn't simply:
+> **What if the MILAN website didn't just tell people about the festival — what if it made them feel like they had already entered it?**
 
-> "Build a website for a college fest."
+That question shaped the entire interface.
 
-It was:
+Instead of building a traditional information-heavy event website, the project focuses on:
 
-> **"What if the website itself felt like entering MILAN?"**
+**visual storytelling + interaction + motion + discovery**
 
-That idea shaped the visual system, interactions, typography and layout.
+The website is therefore designed as a **digital extension of the festival itself**.
 
 ---
 
 # 🖤 Built For
 
-**MILAN 2027**
+### MILAN 2027
 
-SRM Institute of Science & Technology  
+**SRM Institute of Science & Technology**  
 Kattankulathur, Chennai, India
 
 **18 — 21 February 2027**
@@ -321,11 +335,11 @@ Kattankulathur, Chennai, India
 
 ---
 
-## ✦ Status
+## ✦ Project Status
 
-**Current:** `Active Development`
+**Active Development**
 
-The core festival experience is complete. Additional official content, event data and media can be integrated as they become available.
+The core MILAN 2027 digital experience is complete. Official event data, registration systems, artist information and additional festival media can be integrated as they become available.
 
 ---
 
