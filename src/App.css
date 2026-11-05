@@ -3962,3 +3962,358 @@ body {
   transform: scale(1.04);
   filter: brightness(0.82) !important;
 }
+/* ================= EVENT DIRECTORY ================= */
+
+.events-directory {
+  padding: 8rem 6vw;
+  background: var(--black);
+  color: var(--paper);
+}
+
+.events-directory .section-intro {
+  margin-bottom: 3rem;
+}
+
+.event-controls {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.event-controls input,
+.event-controls select {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border: 1px solid rgba(244, 238, 229, 0.18);
+  background: rgba(244, 238, 229, 0.04);
+  color: var(--paper);
+  font: inherit;
+  outline: none;
+  border-radius: 0;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.event-controls input::placeholder {
+  color: rgba(244, 238, 229, 0.5);
+}
+
+.event-controls input:focus,
+.event-controls select:focus {
+  border-color: var(--red);
+  background: rgba(244, 238, 229, 0.07);
+}
+
+.event-controls select option {
+  background: #111;
+  color: var(--paper);
+}
+
+.event-directory-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(244, 238, 229, 0.15);
+}
+
+.event-card {
+  min-height: 280px;
+  padding: 2rem;
+  background: var(--black);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.event-card:hover {
+  background: #111;
+}
+
+.event-card-top,
+.event-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.event-card-top span:first-child {
+  color: var(--red);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.event-card-top span:last-child,
+.event-card-bottom span {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.event-card h3 {
+  margin: 2rem 0 1rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.event-card p {
+  max-width: 500px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.event-card-bottom {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(244, 238, 229, 0.1);
+}
+
+.events-empty-state {
+  padding: 5rem 2rem;
+  text-align: center;
+  border: 1px solid rgba(244, 238, 229, 0.15);
+}
+
+.events-empty-state h3 {
+  margin-bottom: 0.75rem;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.events-empty-state p {
+  color: var(--muted);
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .events-directory {
+    padding: 5rem 5vw;
+  }
+
+  .event-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .event-directory-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .event-card {
+    min-height: 240px;
+    padding: 1.5rem;
+  }
+}
+/* ================= EVENT DETAILS MODAL ================= */
+
+.event-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(12px);
+}
+
+.event-modal-content {
+  position: relative;
+  width: min(720px, 100%);
+  padding: 3.5rem;
+  background: var(--paper);
+  color: var(--black);
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.45);
+}
+
+.event-modal-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: transparent;
+  color: var(--black);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.event-modal-content .eyebrow {
+  color: var(--red);
+}
+
+.event-modal-content h2 {
+  margin: 1rem 0 1.5rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.event-modal-description {
+  max-width: 600px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #555;
+}
+
+.event-modal-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.event-modal-meta div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.event-modal-meta span {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--red);
+}
+
+.event-modal-meta strong {
+  font-size: 0.95rem;
+}
+
+.event-modal-footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: #777;
+}
+
+@media (max-width: 600px) {
+  .event-modal {
+    padding: 1rem;
+  }
+
+  .event-modal-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .event-modal-meta {
+    grid-template-columns: 1fr;
+  }
+}
+/* ================= REGISTRATION FORM ================= */
+
+.registration-form {
+  width: min(620px, 100%);
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.registration-form input,
+.registration-form select {
+  width: 100%;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(244, 238, 229, 0.25);
+  background: rgba(244, 238, 229, 0.06);
+  color: #111;
+  font: inherit;
+  outline: none;
+  border-radius: 0;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.registration-form input::placeholder {
+  color: #777;
+  opacity: 1;
+}
+
+.registration-form select {
+  color: #111;
+  background: #f4eee5;
+}
+
+.registration-form select option {
+  background: #f4eee5;
+  color: #111;
+}
+
+.registration-form input::placeholder {
+  color: rgba(244, 238, 229, 0.55);
+}
+
+.registration-form select {
+  color: rgba(244, 238, 229, 0.75);
+}
+
+.registration-form select option {
+  background: #111;
+  color: var(--paper);
+}
+
+.registration-form input:focus,
+.registration-form select:focus {
+  border-color: var(--red);
+  background: rgba(244, 238, 229, 0.1);
+}
+
+.registration-form input:invalid:not(:placeholder-shown),
+.registration-form select:invalid {
+  border-color: rgba(255, 67, 47, 0.65);
+}
+
+.registration-form .register-button {
+  margin-top: 0.5rem;
+  width: fit-content;
+}
+
+.registration-success,
+.registration-error {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+}
+
+.registration-success {
+  color: #9dbb9b;
+}
+
+.registration-error {
+  color: var(--red);
+}
+
+@media (max-width: 600px) {
+  .registration-form {
+    margin-top: 2rem;
+  }
+
+  .registration-form .register-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+.registration-form input::placeholder {
+  color: #777;
+  opacity: 1;
+}
+
+.registration-form select {
+  color: #111;
+  background: #f4eee5;
+}
+
+.registration-form select option {
+  background: #f4eee5;
+  color: #111;
+}

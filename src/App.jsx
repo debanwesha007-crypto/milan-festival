@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowDownRight, ArrowUpRight, Menu, X } from "lucide-react";
+import events from "./data/events";
 import "./App.css";
 
 const categories = [
@@ -150,7 +151,35 @@ const categoryDetails = {
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [registration, setRegistration] = useState({
+  name: "",
+  email: "",
+  phone: "",
+  event: "",
+});
+
+const [registrationStatus, setRegistrationStatus] = useState("");
   const [selectedGalleryImage, setSelectedGalleryImage] = useState(null);
+  const [eventSearch, setEventSearch] = useState("");
+const [eventCategory, setEventCategory] = useState("ALL");
+
+const filteredEvents = useMemo(() => {
+  const query = eventSearch.trim().toLowerCase();
+
+  return events.filter((event) => {
+    const matchesCategory =
+      eventCategory === "ALL" || event.category === eventCategory;
+
+    const matchesSearch =
+      !query ||
+      event.title.toLowerCase().includes(query) ||
+      event.category.toLowerCase().includes(query) ||
+      event.description.toLowerCase().includes(query);
+
+    return matchesCategory && matchesSearch;
+  });
+}, [eventSearch, eventCategory]);
 
   const selectedDetails = selectedCategory
     ? categoryDetails[selectedCategory.title]
@@ -361,7 +390,6 @@ function App() {
                 }
               }}
             >
-
               <img
                 src={category.image}
                 alt={category.title}
@@ -388,6 +416,112 @@ function App() {
           ))}
 
         </div>
+
+      </section>
+      
+            {/* ================= EVENT DIRECTORY ================= */}
+
+      <section className="events-directory" id="event-directory">
+
+        <div className="section-intro">
+          <span className="section-number">02 / 06</span>
+
+          <div>
+            <p className="eyebrow">EXPLORE MILAN 2027</p>
+
+            <h2>
+              DISCOVER
+              <br />
+              <i>EVENTS.</i>
+            </h2>
+          </div>
+
+          <p className="intro-copy">
+            Search through the MILAN 2027 programme and find the events,
+            performances and experiences that speak to you.
+          </p>
+        </div>
+
+        <div className="event-controls">
+
+          <input
+            type="search"
+            placeholder="Search events..."
+            value={eventSearch}
+            onChange={(e) => setEventSearch(e.target.value)}
+            aria-label="Search events"
+          />
+
+          <select
+            value={eventCategory}
+            onChange={(e) => setEventCategory(e.target.value)}
+            aria-label="Filter events by category"
+          >
+            <option value="ALL">ALL CATEGORIES</option>
+
+            {[...new Set(events.map((event) => event.category))].map(
+              (category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              )
+            )}
+
+          </select>
+
+        </div>
+
+        {filteredEvents.length > 0 ? (
+
+          <div className="event-directory-grid">
+
+            {filteredEvents.map((event) => (
+
+              <motion.article
+  key={event.id}
+  className="event-card"
+  whileHover={{ y: -6 }}
+  transition={{ duration: 0.2 }}
+  onClick={() => setSelectedEvent(event)}
+  role="button"
+  tabIndex={0}
+  onKeyDown={(e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      setSelectedEvent(event);
+    }
+  }}
+>
+
+                <div className="event-card-top">
+                  <span>{event.category}</span>
+                  <span>{event.date}</span>
+                </div>
+
+                <h3>{event.title}</h3>
+
+                <p>{event.description}</p>
+
+                <div className="event-card-bottom">
+                  <span>{event.venue}</span>
+                  <ArrowUpRight size={18} />
+                </div>
+
+              </motion.article>
+
+            ))}
+
+          </div>
+
+        ) : (
+
+          <div className="events-empty-state">
+            <h3>NO EVENTS FOUND.</h3>
+            <p>
+              Try another keyword or select a different category.
+            </p>
+          </div>
+
+        )}
 
       </section>
 
@@ -616,48 +750,121 @@ function App() {
           <span>SRM KTR · CHENNAI</span>
           <strong>#LiveTheChange</strong>
         </div>
-
-      </section>
-
-      {/* ================= REGISTRATION ================= */}
-
-      <section className="register-section" id="register">
-
-        <div className="register-bg">JOIN</div>
-
-        <div className="register-top">
-          <span className="section-number">05 / 06</span>
-          <span className="eyebrow">YOUR TURN</span>
-        </div>
-
         <div className="register-content">
 
-          <p className="register-kicker">
-            READY TO BE PART OF IT?
-          </p>
+  <p className="register-kicker">
+    READY TO BE PART OF IT?
+  </p>
 
-          <h2>
-            DON'T JUST
-            <br />
-            <i>WATCH.</i>
-            <br />
-            LIVE IT.
-          </h2>
+  <h2>
+    DON'T JUST
+    <br />
+    <i>WATCH.</i>
+    <br />
+    LIVE IT.
+  </h2>
 
-          <p className="register-copy">
-            Registrations for MILAN 2027 will open soon.
-            <br />
-            Choose your event. Bring your people.
-            <br />
-            Make your moment count.
-          </p>
+  <p className="register-copy">
+    Choose your event. Bring your people.
+    <br />
+    Make your moment count.
+  </p>
 
-          <button className="register-button">
-            REGISTRATIONS OPENING SOON
-            <ArrowUpRight size={18} />
-          </button>
+  <form
+    className="registration-form"
+    onSubmit={(e) => {
+      e.preventDefault();
 
-        </div>
+      const form = e.currentTarget;
+
+      if (!form.checkValidity()) {
+        setRegistrationStatus("error");
+        form.reportValidity();
+        return;
+      }
+
+      setRegistrationStatus("success");
+    }}
+  >
+
+    <input
+      type="text"
+      placeholder="YOUR NAME"
+      value={registration.name}
+      onChange={(e) =>
+        setRegistration({
+          ...registration,
+          name: e.target.value,
+        })
+      }
+      required
+    />
+
+    <input
+      type="email"
+      placeholder="YOUR EMAIL"
+      value={registration.email}
+      onChange={(e) =>
+        setRegistration({
+          ...registration,
+          email: e.target.value,
+        })
+      }
+      required
+    />
+
+    <input
+      type="tel"
+      placeholder="PHONE NUMBER"
+      value={registration.phone}
+      onChange={(e) =>
+        setRegistration({
+          ...registration,
+          phone: e.target.value,
+        })
+      }
+      required
+    />
+
+    <select
+      value={registration.event}
+      onChange={(e) =>
+        setRegistration({
+          ...registration,
+          event: e.target.value,
+        })
+      }
+      required
+    >
+      <option value="">SELECT EVENT</option>
+
+      {events.map((event) => (
+        <option key={event.id} value={event.title}>
+          {event.title}
+        </option>
+      ))}
+    </select>
+
+    <button type="submit" className="register-button">
+      REGISTER NOW
+      <ArrowUpRight size={18} />
+    </button>
+
+    {registrationStatus === "success" && (
+      <p className="registration-success">
+        REGISTRATION RECEIVED. SEE YOU AT MILAN 2027.
+      </p>
+    )}
+
+    {registrationStatus === "error" && (
+      <p className="registration-error">
+        PLEASE COMPLETE ALL REQUIRED FIELDS.
+      </p>
+    )}
+
+  </form>
+
+</div>
 
         <div className="register-footer">
           <span>18—21 FEBRUARY 2027</span>
@@ -868,6 +1075,50 @@ function App() {
 
         </motion.div>
 
+      )}
+            {selectedEvent && (
+        <div
+          className="event-modal"
+          onClick={() => setSelectedEvent(null)}
+          role="presentation"
+        >
+          <div
+            className="event-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="event-modal-close"
+              onClick={() => setSelectedEvent(null)}
+              aria-label="Close event details"
+            >
+              <X size={24} />
+            </button>
+
+            <p className="eyebrow">{selectedEvent.category}</p>
+
+            <h2>{selectedEvent.title}</h2>
+
+            <p className="event-modal-description">
+              {selectedEvent.description}
+            </p>
+
+            <div className="event-modal-meta">
+              <div>
+                <span>DATE</span>
+                <strong>{selectedEvent.date}</strong>
+              </div>
+
+              <div>
+                <span>VENUE</span>
+                <strong>{selectedEvent.venue}</strong>
+              </div>
+            </div>
+
+            <div className="event-modal-footer">
+              MILAN 2027 · THE FESTIVAL EXPERIENCE
+            </div>
+          </div>
+        </div>
       )}
 
     </main>
