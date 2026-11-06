@@ -200,7 +200,7 @@ function App() {
     });
   }, [eventSearch, eventCategory]);
 
-    const selectedDetails = selectedCategory
+  const selectedDetails = selectedCategory
     ? categoryDetails[selectedCategory.title]
     : null;
 
@@ -718,36 +718,36 @@ function App() {
 
         <div className="gallery-grid">
           <div
-  className="gallery-item gallery-large"
-  onClick={() =>
-    setSelectedGalleryImage({
-      src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1400&q=85",
-      title: "THE CROWD",
-    })
-  }
->
-  <img
-    src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1400&q=85"
-    alt="Festival crowd"
-  />
-  <span>THE CROWD</span>
-</div>
+            className="gallery-item gallery-large"
+            onClick={() =>
+              setSelectedGalleryImage({
+                src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1400&q=85",
+                title: "THE CROWD",
+              })
+            }
+          >
+            <img
+              src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1400&q=85"
+              alt="Festival crowd"
+            />
+            <span>THE CROWD</span>
+          </div>
 
           <div
-  className="gallery-item"
-  onClick={() =>
-    setSelectedGalleryImage({
-      src: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1000&q=85",
-      title: "LIVE",
-    })
-  }
->
-  <img
-    src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1000&q=85"
-    alt="Live festival performance"
-  />
-  <span>LIVE</span>
-</div>
+            className="gallery-item"
+            onClick={() =>
+              setSelectedGalleryImage({
+                src: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1000&q=85",
+                title: "LIVE",
+              })
+            }
+          >
+            <img
+              src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1000&q=85"
+              alt="Live festival performance"
+            />
+            <span>LIVE</span>
+          </div>
 
           <div
             className="gallery-item"
@@ -766,20 +766,20 @@ function App() {
           </div>
 
           <div
-  className="gallery-item gallery-wide"
-  onClick={() =>
-    setSelectedGalleryImage({
-      src: "https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1400&q=85",
-      title: "THE STAGE",
-    })
-  }
->
-  <img
-    src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1400&q=85"
-    alt="MILAN stage performance"
-  />
-  <span>THE STAGE</span>
-</div>
+            className="gallery-item gallery-wide"
+            onClick={() =>
+              setSelectedGalleryImage({
+                src: "https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1400&q=85",
+                title: "THE STAGE",
+              })
+            }
+          >
+            <img
+              src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1400&q=85"
+              alt="MILAN stage performance"
+            />
+            <span>THE STAGE</span>
+          </div>
         </div>
 
         <div className="gallery-bottom">
@@ -967,6 +967,8 @@ function App() {
           <strong>#LiveTheChange</strong>
 
           <span>18—21 FEBRUARY 2027</span>
+
+          <span>DESIGNED &amp; DEVELOPED BY ANWESHA DEB</span>
         </div>
       </footer>
 
