@@ -1738,11 +1738,11 @@ button {
   }
 
   .poster-wrap {
-    width: 280px;
-    right: -30px;
-    top: 22%;
-    opacity: 0.65;
-  }
+  width: 240px;
+  right: 8px;
+  top: 24%;
+  opacity: 0.65;
+}
 
   .section-intro,
   .schedule-heading,
@@ -1838,15 +1838,12 @@ button {
     font-size: 38px;
   }
 
-  .poster-wrap {
-    width: 205px;
-
-    right: -35px;
-    top: 34%;
-
-    opacity: 0.38;
-  }
-
+.poster-wrap {
+  width: 205px;
+  right: 10px;
+  top: 34%;
+  opacity: 0.65;
+}
   .vertical-text {
     display: none;
   }
@@ -3824,11 +3821,12 @@ body {
 
 @media (max-width: 700px) {
   .hero-copy h1 {
-    font-size: clamp(5rem, 23vw, 9rem);
+    font-size: clamp(4.2rem, 19vw, 7rem);
+    line-height: 0.88;
   }
 
   .hero-statement {
-    margin-top: 18px;
+    margin-top: 24px;
   }
 
   .hero-footer {
@@ -3836,7 +3834,7 @@ body {
   }
 }
 /* =========================================================
-   INTERACTIVE GALLERY VIEWER
+  INTERACTIVE GALLERY VIEWER
    ========================================================= */
 
 .gallery-item {
@@ -4346,4 +4344,306 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+}
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .mobile-menu {
+    position: fixed;
+    top: 82px;
+    left: 0;
+    right: 0;
+    z-index: 29;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px 6vw 28px;
+
+    background: rgba(9, 9, 9, 0.97);
+    border-top: 1px solid rgba(244, 238, 229, 0.12);
+    border-bottom: 1px solid rgba(244, 238, 229, 0.12);
+
+    backdrop-filter: blur(18px);
+  }
+
+  .mobile-menu a {
+    padding: 16px 0;
+
+    color: var(--paper);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+
+    border-bottom: 1px solid rgba(244, 238, 229, 0.08);
+  }
+
+  .mobile-menu a:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-menu a:hover {
+    color: var(--red);
+  }
+}
+/* Mobile overflow protection */
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.milan-page {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img,
+video {
+  max-width: 100%;
+}
+/* ================= CUSTOM 404 ================= */
+
+.milan-404 {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding: 8vw;
+
+  background:
+    radial-gradient(
+      circle at 75% 35%,
+      rgba(255, 67, 47, 0.16),
+      transparent 30%
+    ),
+    var(--black);
+
+  isolation: isolate;
+}
+
+.milan-404::before {
+  content: "27";
+  position: absolute;
+  right: 4vw;
+  bottom: -10vw;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(18rem, 35vw, 42rem);
+  font-weight: 700;
+  line-height: 0.8;
+
+  color: rgba(244, 238, 229, 0.025);
+
+  pointer-events: none;
+
+  animation: errorFloat 8s ease-in-out infinite;
+}
+
+.milan-404::after {
+  content: "";
+  position: absolute;
+  width: 32vw;
+  height: 32vw;
+  min-width: 260px;
+  min-height: 260px;
+
+  right: 12%;
+  top: 25%;
+
+  border: 1px solid rgba(255, 67, 47, 0.25);
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 80px rgba(255, 67, 47, 0.08),
+    inset 0 0 80px rgba(255, 67, 47, 0.04);
+
+  animation: errorOrbit 10s linear infinite;
+
+  pointer-events: none;
+}
+
+.milan-404 .eyebrow {
+  position: relative;
+  z-index: 2;
+
+  margin-bottom: 20px;
+
+  color: var(--red);
+
+  animation: errorReveal 0.7s ease both;
+}
+
+.milan-404-number {
+  position: relative;
+  z-index: 2;
+
+  margin-left: -8px;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(8rem, 20vw, 18rem);
+  font-weight: 700;
+  line-height: 0.78;
+  letter-spacing: -0.08em;
+
+  color: var(--paper);
+
+  animation:
+    errorNumberIn 1s cubic-bezier(0.16, 1, 0.3, 1) both,
+    errorPulse 4s ease-in-out 1.2s infinite;
+}
+
+.milan-404 h1 {
+  position: relative;
+  z-index: 2;
+
+  margin: 30px 0 18px;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+
+  animation: errorReveal 0.8s ease 0.25s both;
+}
+
+.milan-404 h1 i {
+  color: var(--red);
+  font-style: normal;
+}
+
+.milan-404 > p:not(.eyebrow) {
+  position: relative;
+  z-index: 2;
+
+  max-width: 480px;
+  margin: 0 0 34px;
+
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+
+  animation: errorReveal 0.8s ease 0.4s both;
+}
+
+.milan-404 .explore-button {
+  position: relative;
+  z-index: 2;
+
+  animation: errorReveal 0.8s ease 0.55s both;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.milan-404 .explore-button:hover {
+  transform: translate(5px, -5px);
+}
+
+@keyframes errorReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes errorNumberIn {
+  from {
+    opacity: 0;
+    transform: scale(0.7) translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes errorPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.82;
+  }
+}
+
+@keyframes errorFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-25px) rotate(-2deg);
+  }
+}
+
+@keyframes errorOrbit {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(180deg) scale(1.05);
+  }
+
+  to {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@media (max-width: 700px) {
+  .milan-404 {
+    padding: 28vw 7vw;
+  }
+
+  .milan-404::before {
+    right: -20vw;
+    bottom: 5vh;
+    font-size: 80vw;
+  }
+
+  .milan-404::after {
+    width: 70vw;
+    height: 70vw;
+    right: -20vw;
+    top: 25%;
+  }
+
+  .milan-404-number {
+    font-size: 38vw;
+  }
+
+  .milan-404 h1 {
+    font-size: clamp(2.3rem, 11vw, 4rem);
+  }
+
+  .milan-404 > p:not(.eyebrow) {
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .milan-404 *,
+  .milan-404::before,
+  .milan-404::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }

@@ -152,56 +152,87 @@ const categoryDetails = {
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-  const handleEscape = (event) => {
-    if (event.key === "Escape") {
-      setSelectedEvent(null);
-    }
-  };
-
-  document.addEventListener("keydown", handleEscape);
-
-  return () => {
-    document.removeEventListener("keydown", handleEscape);
-  };
-}, []);
   const [registration, setRegistration] = useState({
-  name: "",
-  email: "",
-  phone: "",
-  event: "",
-});
+    name: "",
+    email: "",
+    phone: "",
+    event: "",
+  });
 
-const [registrationStatus, setRegistrationStatus] = useState("");
+  const [registrationStatus, setRegistrationStatus] = useState("");
   const [selectedGalleryImage, setSelectedGalleryImage] = useState(null);
   const [eventSearch, setEventSearch] = useState("");
-const [eventCategory, setEventCategory] = useState("ALL");
+  const [eventCategory, setEventCategory] = useState("ALL");
 
-const filteredEvents = useMemo(() => {
-  const query = eventSearch.trim().toLowerCase();
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setSelectedEvent(null);
+        setSelectedCategory(null);
+        setSelectedGalleryImage(null);
+        setMobileMenuOpen(false);
+      }
+    };
 
-  return events.filter((event) => {
-    const matchesCategory =
-      eventCategory === "ALL" || event.category === eventCategory;
+    document.addEventListener("keydown", handleEscape);
 
-    const matchesSearch =
-      !query ||
-      event.title.toLowerCase().includes(query) ||
-      event.category.toLowerCase().includes(query) ||
-      event.description.toLowerCase().includes(query);
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
-    return matchesCategory && matchesSearch;
-  });
-}, [eventSearch, eventCategory]);
+  const filteredEvents = useMemo(() => {
+    const query = eventSearch.trim().toLowerCase();
 
-  const selectedDetails = selectedCategory
+    return events.filter((event) => {
+      const matchesCategory =
+        eventCategory === "ALL" || event.category === eventCategory;
+
+      const matchesSearch =
+        !query ||
+        event.title.toLowerCase().includes(query) ||
+        event.category.toLowerCase().includes(query) ||
+        event.description.toLowerCase().includes(query);
+
+      return matchesCategory && matchesSearch;
+    });
+  }, [eventSearch, eventCategory]);
+
+    const selectedDetails = selectedCategory
     ? categoryDetails[selectedCategory.title]
     : null;
 
+  const isNotFound = window.location.pathname !== "/";
+
+  if (isNotFound) {
+    return (
+      <main className="milan-404">
+        <div className="milan-404-number">404</div>
+
+        <p className="eyebrow">MILAN 2027</p>
+
+        <h1>
+          THIS PAGE
+          <br />
+          <i>DOESN'T EXIST.</i>
+        </h1>
+
+        <p>
+          Looks like you've wandered beyond the festival grounds.
+        </p>
+
+        <a href="/" className="explore-button">
+          BACK TO MILAN
+          <ArrowUpRight size={18} />
+        </a>
+      </main>
+    );
+  }
+
   return (
     <main className="milan-page">
-
       {/* ================= NAVBAR ================= */}
 
       <header className="navbar">
@@ -217,15 +248,45 @@ const filteredEvents = useMemo(() => {
           <a href="#gallery">GALLERY</a>
         </nav>
 
-        <button className="menu-button" aria-label="Open menu">
-          <Menu size={21} />
+        <button
+          className="menu-button"
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          {mobileMenuOpen ? <X size={21} /> : <Menu size={21} />}
         </button>
       </header>
+
+      {/* ================= MOBILE MENU ================= */}
+
+      {mobileMenuOpen && (
+        <div className="mobile-menu">
+          <a href="#events" onClick={() => setMobileMenuOpen(false)}>
+            EVENTS
+          </a>
+
+          <a href="#shows" onClick={() => setMobileMenuOpen(false)}>
+            PRO SHOWS
+          </a>
+
+          <a href="#schedule" onClick={() => setMobileMenuOpen(false)}>
+            SCHEDULE
+          </a>
+
+          <a href="#gallery" onClick={() => setMobileMenuOpen(false)}>
+            GALLERY
+          </a>
+
+          <a href="#register" onClick={() => setMobileMenuOpen(false)}>
+            REGISTER
+          </a>
+        </div>
+      )}
 
       {/* ================= HERO ================= */}
 
       <section className="hero">
-
         <div className="hero-noise" />
 
         <div className="red-glow red-glow-one" />
@@ -239,7 +300,6 @@ const filteredEvents = useMemo(() => {
         </div>
 
         <div className="hero-copy">
-
           <motion.div
             className="edition"
             initial={{ opacity: 0, y: 20 }}
@@ -293,7 +353,6 @@ const filteredEvents = useMemo(() => {
 
             <span className="hash">#LiveTheChange</span>
           </motion.div>
-
         </div>
 
         {/* ================= POSTER ================= */}
@@ -331,7 +390,6 @@ const filteredEvents = useMemo(() => {
         {/* ================= HERO FOOTER ================= */}
 
         <div className="hero-footer">
-
           <div>
             <strong>40+</strong>
             <span>EVENTS</span>
@@ -351,17 +409,13 @@ const filteredEvents = useMemo(() => {
             <span>SCROLL TO EXPLORE</span>
             <ArrowDownRight size={16} />
           </div>
-
         </div>
-
       </section>
 
       {/* ================= EVENTS ================= */}
 
       <section className="events-section" id="events">
-
         <div className="section-intro">
-
           <span className="section-number">01 / 06</span>
 
           <div>
@@ -375,17 +429,13 @@ const filteredEvents = useMemo(() => {
           </div>
 
           <p className="intro-copy">
-            Music. Dance. Literature. Art. Gaming.
-            Dramatics. Whatever your language of
-            expression, there is a place for you at MILAN.
+            Music. Dance. Literature. Art. Gaming. Dramatics. Whatever your
+            language of expression, there is a place for you at MILAN.
           </p>
-
         </div>
 
         <div className="category-grid">
-
           {categories.map((category, index) => (
-
             <motion.article
               key={category.number}
               className={
@@ -412,9 +462,7 @@ const filteredEvents = useMemo(() => {
 
               <div className="category-overlay" />
 
-              <div className="category-number">
-                {category.number}
-              </div>
+              <div className="category-number">{category.number}</div>
 
               <div className="category-content">
                 <p>{category.subtitle}</p>
@@ -424,19 +472,14 @@ const filteredEvents = useMemo(() => {
               <div className="category-arrow">
                 <ArrowUpRight size={20} />
               </div>
-
             </motion.article>
-
           ))}
-
         </div>
-
       </section>
-      
-            {/* ================= EVENT DIRECTORY ================= */}
+
+      {/* ================= EVENT DIRECTORY ================= */}
 
       <section className="events-directory" id="event-directory">
-
         <div className="section-intro">
           <span className="section-number">02 / 06</span>
 
@@ -457,7 +500,6 @@ const filteredEvents = useMemo(() => {
         </div>
 
         <div className="event-controls">
-
           <input
             type="search"
             placeholder="Search events..."
@@ -480,32 +522,26 @@ const filteredEvents = useMemo(() => {
                 </option>
               )
             )}
-
           </select>
-
         </div>
 
         {filteredEvents.length > 0 ? (
-
           <div className="event-directory-grid">
-
             {filteredEvents.map((event) => (
-
               <motion.article
-  key={event.id}
-  className="event-card"
-  whileHover={{ y: -6 }}
-  transition={{ duration: 0.2 }}
-  onClick={() => setSelectedEvent(event)}
-  role="button"
-  tabIndex={0}
-  onKeyDown={(e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      setSelectedEvent(event);
-    }
-  }}
->
-
+                key={event.id}
+                className="event-card"
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => setSelectedEvent(event)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    setSelectedEvent(event);
+                  }
+                }}
+              >
                 <div className="event-card-top">
                   <span>{event.category}</span>
                   <span>{event.date}</span>
@@ -519,32 +555,21 @@ const filteredEvents = useMemo(() => {
                   <span>{event.venue}</span>
                   <ArrowUpRight size={18} />
                 </div>
-
               </motion.article>
-
             ))}
-
           </div>
-
         ) : (
-
           <div className="events-empty-state">
             <h3>NO EVENTS FOUND.</h3>
-            <p>
-              Try another keyword or select a different category.
-            </p>
+            <p>Try another keyword or select a different category.</p>
           </div>
-
         )}
-
       </section>
 
       {/* ================= PRO SHOWS ================= */}
 
       <section className="shows-section" id="shows">
-
         <div className="shows-copy">
-
           <span className="eyebrow">02 / THE STAGE</span>
 
           <h2>
@@ -560,18 +585,15 @@ const filteredEvents = useMemo(() => {
             <br />
             The biggest moments are still to come.
           </p>
-
         </div>
 
         <div className="shows-card">
-
           <div className="shows-card-top">
             <span>MILAN 2027</span>
             <span>PRO SHOWS</span>
           </div>
 
           <div className="shows-card-center">
-
             <span>ARTIST LINEUP</span>
 
             <strong>
@@ -579,24 +601,19 @@ const filteredEvents = useMemo(() => {
               <br />
               SOON.
             </strong>
-
           </div>
 
           <div className="shows-card-bottom">
             <span>18—21 FEBRUARY 2027</span>
             <span>SRM KTR</span>
           </div>
-
         </div>
-
       </section>
 
       {/* ================= SCHEDULE ================= */}
 
       <section className="schedule-section" id="schedule">
-
         <div className="schedule-heading">
-
           <span className="section-number">03 / 06</span>
 
           <div>
@@ -610,15 +627,12 @@ const filteredEvents = useMemo(() => {
           </div>
 
           <p className="schedule-copy">
-            The detailed 2027 event schedule will be
-            announced soon. Check back here for
-            timings, venues and event registrations.
+            The detailed 2027 event schedule will be announced soon. Check
+            back here for timings, venues and event registrations.
           </p>
-
         </div>
 
         <div className="schedule-days">
-
           <article className="day-card active">
             <span>DAY 01</span>
             <strong>18</strong>
@@ -670,25 +684,19 @@ const filteredEvents = useMemo(() => {
 
             <ArrowUpRight size={20} />
           </article>
-
         </div>
 
         <div className="schedule-note">
           <span>VENUE</span>
           <strong>AUDI GROUND · SRM KTR</strong>
-          <small>
-            2026 venue reference · 2027 venue to be confirmed
-          </small>
+          <small>2026 venue reference · 2027 venue to be confirmed</small>
         </div>
-
       </section>
 
       {/* ================= GALLERY ================= */}
 
       <section className="gallery-section" id="gallery">
-
         <div className="gallery-heading">
-
           <span className="section-number">04 / 06</span>
 
           <div>
@@ -704,14 +712,11 @@ const filteredEvents = useMemo(() => {
           <p className="gallery-copy">
             Four days. Hundreds of moments.
             <br />
-            A campus transformed by culture,
-            creativity and celebration.
+            A campus transformed by culture, creativity and celebration.
           </p>
-
         </div>
 
         <div className="gallery-grid">
-
           <div
   className="gallery-item gallery-large"
   onClick={() =>
@@ -720,7 +725,13 @@ const filteredEvents = useMemo(() => {
       title: "THE CROWD",
     })
   }
-></div>
+>
+  <img
+    src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1400&q=85"
+    alt="Festival crowd"
+  />
+  <span>THE CROWD</span>
+</div>
 
           <div
   className="gallery-item"
@@ -730,17 +741,23 @@ const filteredEvents = useMemo(() => {
       title: "LIVE",
     })
   }
-></div>
+>
+  <img
+    src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1000&q=85"
+    alt="Live festival performance"
+  />
+  <span>LIVE</span>
+</div>
 
           <div
-  className="gallery-item"
-  onClick={() =>
-    setSelectedGalleryImage({
-      src: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1000&q=85",
-      title: "NIGHTS",
-    })
-  }
->
+            className="gallery-item"
+            onClick={() =>
+              setSelectedGalleryImage({
+                src: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1000&q=85",
+                title: "NIGHTS",
+              })
+            }
+          >
             <img
               src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1000&q=85"
               alt="Festival lights"
@@ -756,150 +773,147 @@ const filteredEvents = useMemo(() => {
       title: "THE STAGE",
     })
   }
-></div>
-
+>
+  <img
+    src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1400&q=85"
+    alt="MILAN stage performance"
+  />
+  <span>THE STAGE</span>
+</div>
         </div>
 
         <div className="gallery-bottom">
           <span>SRM KTR · CHENNAI</span>
           <strong>#LiveTheChange</strong>
         </div>
+      </section>
+
+      {/* ================= REGISTER ================= */}
+
+      <section className="register-section" id="register">
         <div className="register-content">
+          <p className="register-kicker">READY TO BE PART OF IT?</p>
 
-  <p className="register-kicker">
-    READY TO BE PART OF IT?
-  </p>
+          <h2>
+            DON'T JUST
+            <br />
+            <i>WATCH.</i>
+            <br />
+            LIVE IT.
+          </h2>
 
-  <h2>
-    DON'T JUST
-    <br />
-    <i>WATCH.</i>
-    <br />
-    LIVE IT.
-  </h2>
+          <p className="register-copy">
+            Choose your event. Bring your people.
+            <br />
+            Make your moment count.
+          </p>
 
-  <p className="register-copy">
-    Choose your event. Bring your people.
-    <br />
-    Make your moment count.
-  </p>
+          <form
+            className="registration-form"
+            onSubmit={(e) => {
+              e.preventDefault();
 
-  <form
-    className="registration-form"
-    onSubmit={(e) => {
-      e.preventDefault();
+              const form = e.currentTarget;
 
-      const form = e.currentTarget;
+              if (!form.checkValidity()) {
+                setRegistrationStatus("error");
+                form.reportValidity();
+                return;
+              }
 
-      if (!form.checkValidity()) {
-        setRegistrationStatus("error");
-        form.reportValidity();
-        return;
-      }
+              setRegistrationStatus("success");
+            }}
+          >
+            <input
+              type="text"
+              placeholder="YOUR NAME"
+              value={registration.name}
+              onChange={(e) =>
+                setRegistration({
+                  ...registration,
+                  name: e.target.value,
+                })
+              }
+              required
+            />
 
-      setRegistrationStatus("success");
-    }}
-  >
+            <input
+              type="email"
+              placeholder="YOUR EMAIL"
+              value={registration.email}
+              onChange={(e) =>
+                setRegistration({
+                  ...registration,
+                  email: e.target.value,
+                })
+              }
+              required
+            />
 
-    <input
-      type="text"
-      placeholder="YOUR NAME"
-      value={registration.name}
-      onChange={(e) =>
-        setRegistration({
-          ...registration,
-          name: e.target.value,
-        })
-      }
-      required
-    />
+            <input
+              type="tel"
+              placeholder="PHONE NUMBER"
+              value={registration.phone}
+              onChange={(e) =>
+                setRegistration({
+                  ...registration,
+                  phone: e.target.value,
+                })
+              }
+              required
+            />
 
-    <input
-      type="email"
-      placeholder="YOUR EMAIL"
-      value={registration.email}
-      onChange={(e) =>
-        setRegistration({
-          ...registration,
-          email: e.target.value,
-        })
-      }
-      required
-    />
+            <select
+              value={registration.event}
+              onChange={(e) =>
+                setRegistration({
+                  ...registration,
+                  event: e.target.value,
+                })
+              }
+              required
+            >
+              <option value="">SELECT EVENT</option>
 
-    <input
-      type="tel"
-      placeholder="PHONE NUMBER"
-      value={registration.phone}
-      onChange={(e) =>
-        setRegistration({
-          ...registration,
-          phone: e.target.value,
-        })
-      }
-      required
-    />
+              {events.map((event) => (
+                <option key={event.id} value={event.title}>
+                  {event.title}
+                </option>
+              ))}
+            </select>
 
-    <select
-      value={registration.event}
-      onChange={(e) =>
-        setRegistration({
-          ...registration,
-          event: e.target.value,
-        })
-      }
-      required
-    >
-      <option value="">SELECT EVENT</option>
+            <button type="submit" className="register-button">
+              REGISTER NOW
+              <ArrowUpRight size={18} />
+            </button>
 
-      {events.map((event) => (
-        <option key={event.id} value={event.title}>
-          {event.title}
-        </option>
-      ))}
-    </select>
+            {registrationStatus === "success" && (
+              <p className="registration-success">
+                REGISTRATION RECEIVED. SEE YOU AT MILAN 2027.
+              </p>
+            )}
 
-    <button type="submit" className="register-button">
-      REGISTER NOW
-      <ArrowUpRight size={18} />
-    </button>
-
-    {registrationStatus === "success" && (
-      <p className="registration-success">
-        REGISTRATION RECEIVED. SEE YOU AT MILAN 2027.
-      </p>
-    )}
-
-    {registrationStatus === "error" && (
-      <p className="registration-error">
-        PLEASE COMPLETE ALL REQUIRED FIELDS.
-      </p>
-    )}
-
-  </form>
-
-</div>
+            {registrationStatus === "error" && (
+              <p className="registration-error">
+                PLEASE COMPLETE ALL REQUIRED FIELDS.
+              </p>
+            )}
+          </form>
+        </div>
 
         <div className="register-footer">
           <span>18—21 FEBRUARY 2027</span>
           <span>SRM KTR · CHENNAI</span>
           <strong>#LiveTheChange</strong>
         </div>
-
       </section>
 
       {/* ================= FOOTER ================= */}
 
       <footer className="milan-footer">
-
         <div className="footer-main">
-
           <div className="footer-brand">
-
-            <img
-              src="/assets/milan-logo.png"
-              alt="MILAN 2027"
-            />
+            <img src="/assets/milan-logo.png" alt="MILAN 2027" />
 
             <h2>
               SEE YOU
@@ -912,11 +926,9 @@ const filteredEvents = useMemo(() => {
               <br />
               Directorate of Student Affairs
             </p>
-
           </div>
 
           <div className="footer-links">
-
             <div>
               <span>EXPLORE</span>
 
@@ -946,68 +958,62 @@ const filteredEvents = useMemo(() => {
                 SRM DSA
               </a>
             </div>
-
           </div>
-
         </div>
 
         <div className="footer-bottom">
-
           <span>© 2027 MILAN · SRM KTR</span>
 
           <strong>#LiveTheChange</strong>
 
           <span>18—21 FEBRUARY 2027</span>
-
         </div>
-
       </footer>
 
-      {/* ================= CATEGORY EXPERIENCE ================= */}
       {/* ================= GALLERY VIEWER ================= */}
 
-{selectedGalleryImage && (
-  <motion.div
-    className="gallery-viewer"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    onClick={() => setSelectedGalleryImage(null)}
-  >
-    <button
-      className="gallery-viewer-close"
-      onClick={() => setSelectedGalleryImage(null)}
-      aria-label="Close gallery"
-    >
-      <X size={26} />
-    </button>
+      {selectedGalleryImage && (
+        <motion.div
+          className="gallery-viewer"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setSelectedGalleryImage(null)}
+        >
+          <button
+            className="gallery-viewer-close"
+            onClick={() => setSelectedGalleryImage(null)}
+            aria-label="Close gallery"
+          >
+            <X size={26} />
+          </button>
 
-    <div
-      className="gallery-viewer-content"
-      onClick={(event) => event.stopPropagation()}
-    >
-      <img
-        src={selectedGalleryImage.src}
-        alt={selectedGalleryImage.title}
-      />
+          <div
+            className="gallery-viewer-content"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <img
+              src={selectedGalleryImage.src}
+              alt={selectedGalleryImage.title}
+            />
 
-      <div className="gallery-viewer-caption">
-        <span>MILAN 2026 ARCHIVE</span>
-        <strong>{selectedGalleryImage.title}</strong>
-      </div>
-    </div>
-  </motion.div>
-)}
+            <div className="gallery-viewer-caption">
+              <span>MILAN 2026 ARCHIVE</span>
+              <strong>{selectedGalleryImage.title}</strong>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      {/* ================= CATEGORY EXPERIENCE ================= */}
 
       {selectedCategory && selectedDetails && (
-
         <motion.div
           className="category-experience"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-
           <button
             className="experience-close"
             onClick={() => setSelectedCategory(null)}
@@ -1027,14 +1033,9 @@ const filteredEvents = useMemo(() => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.45 }}
           >
+            <p className="experience-eyebrow">MILAN 2027 · EXPLORE</p>
 
-            <p className="experience-eyebrow">
-              MILAN 2027 · EXPLORE
-            </p>
-
-            <h2>
-              {selectedCategory.title}
-            </h2>
+            <h2>{selectedCategory.title}</h2>
 
             <p className="experience-tagline">
               {selectedDetails.tagline}
@@ -1045,27 +1046,16 @@ const filteredEvents = useMemo(() => {
             </p>
 
             <div className="experience-events">
-
               <span>EVENTS</span>
 
               {selectedDetails.events.map((event, index) => (
-
                 <div key={event}>
+                  <small>{String(index + 1).padStart(2, "0")}</small>
 
-                  <small>
-                    {String(index + 1).padStart(2, "0")}
-                  </small>
-
-                  <strong>
-                    {event}
-                  </strong>
-
+                  <strong>{event}</strong>
                 </div>
-
               ))}
-
             </div>
-
           </motion.div>
 
           <motion.div
@@ -1074,7 +1064,6 @@ const filteredEvents = useMemo(() => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7 }}
           >
-
             <img
               src={selectedCategory.image}
               alt={selectedCategory.title + " at MILAN"}
@@ -1084,13 +1073,13 @@ const filteredEvents = useMemo(() => {
               <span>2026 ARCHIVE</span>
               <strong>MILAN</strong>
             </div>
-
           </motion.div>
-
         </motion.div>
-
       )}
-            {selectedEvent && (
+
+      {/* ================= EVENT MODAL ================= */}
+
+      {selectedEvent && (
         <div
           className="event-modal"
           onClick={() => setSelectedEvent(null)}
@@ -1129,34 +1118,33 @@ const filteredEvents = useMemo(() => {
             </div>
 
             <div className="event-modal-footer">
-  <button
-    type="button"
-    className="event-modal-register"
-    onClick={() => {
-      setRegistration({
-        ...registration,
-        event: selectedEvent.title,
-      });
+              <button
+                type="button"
+                className="event-modal-register"
+                onClick={() => {
+                  setRegistration({
+                    ...registration,
+                    event: selectedEvent.title,
+                  });
 
-      setSelectedEvent(null);
+                  setSelectedEvent(null);
 
-      setTimeout(() => {
-        document
-          .getElementById("register")
-          ?.scrollIntoView({ behavior: "smooth" });
-      }, 100);
-    }}
-  >
-    REGISTER FOR THIS EVENT
-    <ArrowUpRight size={18} />
-  </button>
+                  setTimeout(() => {
+                    document
+                      .getElementById("register")
+                      ?.scrollIntoView({ behavior: "smooth" });
+                  }, 100);
+                }}
+              >
+                REGISTER FOR THIS EVENT
+                <ArrowUpRight size={18} />
+              </button>
 
-  <span>MILAN 2027 · THE FESTIVAL EXPERIENCE</span>
-</div>
+              <span>MILAN 2027 · THE FESTIVAL EXPERIENCE</span>
+            </div>
           </div>
         </div>
       )}
-
     </main>
   );
 }
