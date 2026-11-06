@@ -6,7 +6,7 @@ The project focuses on building an interactive festival experience rather than a
 
 ## Live Demo
 
-https://milan-festival-rmgw9qn2u-debanwesha007-cryptos-projects.vercel.app/
+https://milan-festival.vercel.app/
 
 ## Project Repository
 
